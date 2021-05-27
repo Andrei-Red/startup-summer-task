@@ -3,10 +3,12 @@ import { Provider } from "react-redux";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { searchTextReducer } from "./searchTextReducer";
+import { searchReducer } from "./searchReducer";
+import { userUnfoReducer } from "./userInfoReducer";
 
 const rootReducer = combineReducers({
-  inputText: searchTextReducer,
+  searchText: searchReducer,
+  userData: userUnfoReducer,
 });
 
 export const store = createStore(
