@@ -1,4 +1,8 @@
-export type TSearchText = { inputText: String };
+export type TSearchInfo = {
+  inputText: String;
+  isError: boolean;
+  isLoading: boolean;
+};
 
 export type TAction = { type: String; payload: unknown };
 
@@ -12,6 +16,6 @@ export type TUserInfo = {
 };
 
 export type TState = {
-  searchText: TSearchText;
+  searchText: TSearchInfo;
   userInfo: TUserInfo;
 };
