@@ -6,6 +6,7 @@ import {
   SET_USER_UNFO,
   SET_ERROR_REQUEST,
   SET_USER_REPOS,
+  SET_LOADIND,
 } from "./actionsConstants";
 import { TUserInfo, TUserRepo, TUserReposArray } from "../types";
 
@@ -16,6 +17,11 @@ export const setSearchText = (payload: string) => ({
 
 export const setErrorRequest = (payload: boolean) => ({
   type: SET_ERROR_REQUEST,
+  payload,
+});
+
+export const setLoading = (payload: boolean) => ({
+  type: SET_LOADIND,
   payload,
 });
 
@@ -35,6 +41,7 @@ export const getUserInfo = (
   const t = 1;
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const responseUserInfo = await axios.get(
         `https://api.github.com/users/${searchUserName}`
       );
@@ -67,25 +74,17 @@ export const getUserInfo = (
         return { name, repoUrl, description };
       });
       dispatch(setUserReros(reposArray));
-      console.log("reposArray", reposArray);
+      dispatch(setLoading(false));
 
-      /*       const {
-        name: userName,
-        avatar_url: userAvatarURL,
-        followers: userFolovers,
-        following: userFoloving,
-        login: userNickName,
-        html_url: userURL,
-      } = responseUserInfo.data; */
+      console.log("reposArray", reposArray);
     } catch (err) {
       const status = err?.response?.status;
       if (status >= 400) {
         console.log("ERROR gj");
         console.log(status);
         dispatch(setErrorRequest(true));
+        dispatch(setLoading(false));
       }
-      // dispatch(setStatisticsError(err));
-      // return;
     }
   };
 };

@@ -1,5 +1,9 @@
 import { TAction, TSearchInfo } from "../types";
-import { SET_SEARCH_TEXT, SET_ERROR_REQUEST } from "./actionsConstants";
+import {
+  SET_SEARCH_TEXT,
+  SET_ERROR_REQUEST,
+  SET_LOADIND,
+} from "./actionsConstants";
 
 const defaultSearchInfo: TSearchInfo = {
   inputText: "",
@@ -18,6 +22,11 @@ export const searchReducer = (state = defaultSearchInfo, action: TAction) => {
       return {
         ...state,
         isError: action.payload,
+      };
+    case SET_LOADIND:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;
