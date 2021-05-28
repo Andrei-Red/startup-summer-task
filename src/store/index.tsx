@@ -7,7 +7,7 @@ import { searchReducer } from "./searchReducer";
 import { userUnfoReducer } from "./userInfoReducer";
 
 const rootReducer = combineReducers({
-  searchText: searchReducer,
+  searchState: searchReducer,
   userData: userUnfoReducer,
 });
 

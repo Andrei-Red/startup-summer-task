@@ -25,6 +25,6 @@ export type TUserRepo = {
 export type TUserReposArray = [TUserRepo];
 
 export type TState = {
-  searchText: TSearchInfo;
-  userInfo: TUserInfo;
+  searchState: TSearchInfo;
+  userData: { userInfo: TUserInfo; userRepos: TUserReposArray };
 };

@@ -1,15 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputAdornment, OutlinedInput } from "@material-ui/core";
-import { getUserInfo } from "../../store/actions";
+import { getUserInfo, setSearchText } from "../../../../store/actions";
 
 export const Header: FC = () => {
   const [inputValue, setInputValue] = useState("");
 
   const dispatch = useDispatch();
-
-  const userInfo = useSelector((state) => state);
-  console.log("userInfo", userInfo);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("e.target.value", e.target.value);
@@ -19,16 +16,13 @@ export const Header: FC = () => {
 
   const submitFormHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("inputValue", inputValue);
+    dispatch(getUserInfo(inputValue));
+    setInputValue("");
   };
-
-  useEffect(() => {
-    dispatch(getUserInfo("Andrei107"));
-  }, []);
 
   return (
     <>
-      <h1>Header1</h1>
+      <h1>Header</h1>
       <form onSubmit={submitFormHandler}>
         <OutlinedInput
           id="outlined-adornment-amount"

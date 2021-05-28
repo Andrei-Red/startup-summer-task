@@ -1,10 +1,4 @@
 import React, { FC } from "react";
-import { Header } from "../Header";
+import { Main } from "../Main";
 
-export const App: FC = () => (
-  <>
-    <h1>App</h1>
-    <Header />
-    <h1>е</h1>
-  </>
-);
+export const App: FC = () => <Main />;

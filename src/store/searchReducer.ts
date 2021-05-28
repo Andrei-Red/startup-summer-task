@@ -16,7 +16,7 @@ export const searchReducer = (state = defaultSearchInfo, action: TAction) => {
     case SET_SEARCH_TEXT:
       return {
         ...state,
-        searchText: action.payload,
+        inputText: action.payload,
       };
     case SET_ERROR_REQUEST:
       return {

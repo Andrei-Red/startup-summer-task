@@ -36,7 +36,7 @@ export const setUserReros = (payload: TUserReposArray) => ({
 });
 
 export const getUserInfo = (
-  searchUserName: string
+  searchUserName: String
 ): ThunkAction<void, unknown, unknown, Action<string>> => {
   const t = 1;
   return async (dispatch) => {
