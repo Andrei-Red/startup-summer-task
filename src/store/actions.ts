@@ -5,8 +5,9 @@ import {
   SET_SEARCH_TEXT,
   SET_USER_UNFO,
   SET_ERROR_REQUEST,
+  SET_USER_REPOS,
 } from "./actionsConstants";
-import { TUserInfo } from "../types";
+import { TUserInfo, TUserRepo, TUserReposArray } from "../types";
 
 export const setSearchText = (payload: string) => ({
   type: SET_SEARCH_TEXT,
@@ -23,17 +24,19 @@ export const setUserInfo = (payload: TUserInfo) => ({
   payload,
 });
 
-export const getUserInfo = (): ThunkAction<
-  void,
-  unknown,
-  unknown,
-  Action<string>
-> => {
+export const setUserReros = (payload: TUserReposArray) => ({
+  type: SET_USER_REPOS,
+  payload,
+});
+
+export const getUserInfo = (
+  searchUserName: string
+): ThunkAction<void, unknown, unknown, Action<string>> => {
   const t = 1;
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `https://api.github.com/users/Andrei1079`
+      const responseUserInfo = await axios.get(
+        `https://api.github.com/users/${searchUserName}`
       );
       const {
         name: userName,
@@ -42,7 +45,7 @@ export const getUserInfo = (): ThunkAction<
         following: userFoloving,
         login: userNickName,
         html_url: userURL,
-      } = response.data;
+      } = responseUserInfo.data;
 
       dispatch(
         setUserInfo({
@@ -54,6 +57,26 @@ export const getUserInfo = (): ThunkAction<
           userFolovers,
         })
       );
+
+      const responseUserRepos = await axios.get(
+        `https://api.github.com/users/${searchUserName}/repos`
+      );
+      const reposInfo = responseUserRepos.data;
+      const reposArray = reposInfo.map((repo: TUserRepo) => {
+        const { name, html_url: repoUrl, description } = repo;
+        return { name, repoUrl, description };
+      });
+      dispatch(setUserReros(reposArray));
+      console.log("reposArray", reposArray);
+
+      /*       const {
+        name: userName,
+        avatar_url: userAvatarURL,
+        followers: userFolovers,
+        following: userFoloving,
+        login: userNickName,
+        html_url: userURL,
+      } = responseUserInfo.data; */
     } catch (err) {
       const status = err?.response?.status;
       if (status >= 400) {

@@ -1,4 +1,8 @@
-import { SET_SEARCH_TEXT, SET_USER_UNFO } from "./actionsConstants";
+import {
+  SET_SEARCH_TEXT,
+  SET_USER_UNFO,
+  SET_USER_REPOS,
+} from "./actionsConstants";
 import { TUserInfo, TAction } from "../types";
 
 const defaultUserInfo = {
@@ -10,6 +14,7 @@ const defaultUserInfo = {
     userFoloving: null,
     userFolovers: null,
   },
+  userRepos: [],
 };
 
 export const userUnfoReducer = (state = defaultUserInfo, action: TAction) => {
@@ -18,6 +23,11 @@ export const userUnfoReducer = (state = defaultUserInfo, action: TAction) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    case SET_USER_REPOS:
+      return {
+        ...state,
+        userRepos: action.payload,
       };
     default:
       return state;

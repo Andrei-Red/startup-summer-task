@@ -23,7 +23,7 @@ export const Header: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getUserInfo());
+    dispatch(getUserInfo("Andrei107"));
   }, []);
 
   return (
