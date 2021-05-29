@@ -1,8 +1,4 @@
-import {
-  SET_SEARCH_TEXT,
-  SET_USER_UNFO,
-  SET_USER_REPOS,
-} from "./actionsConstants";
+import { SET_USER_UNFO, SET_USER_REPOS } from "./actionsConstants";
 import { TUserInfo, TAction } from "../types";
 
 const defaultUserInfo = {
@@ -13,6 +9,7 @@ const defaultUserInfo = {
     userAvatarURL: "",
     userFoloving: null,
     userFolovers: null,
+    publickRepos: null,
   },
   userRepos: [],
 };

@@ -1,28 +1,32 @@
 export type TSearchInfo = {
-  inputText: String;
   isError: boolean;
   isLoading: boolean;
 };
 
-export type TAction = { type: String; payload: unknown };
+export type TAction = { type: string; payload: unknown };
 
 export type TUserInfo = {
-  userName: String;
-  userNickName: String;
-  userURL: String;
-  userAvatarURL: String;
-  userFoloving: Number | null;
-  userFolovers: Number | null;
+  userName: string;
+  userNickName: string;
+  userURL: string;
+  userAvatarURL: string;
+  userFoloving: number | null;
+  userFolovers: number | null;
+  publickRepos: number | null;
 };
 
 export type TUserRepo = {
-  name: String;
-  html_url: String;
-  repoUrl: String;
-  description: String;
+  name: string;
+  html_url: string;
+  repoUrl: string;
+  description: string;
 };
 
 export type TUserReposArray = [TUserRepo];
+/* export type TUserReposArray = {
+  currentPage: Number;
+  perPage: Number;
+}; */
 
 export type TState = {
   searchState: TSearchInfo;

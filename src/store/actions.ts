@@ -2,7 +2,6 @@ import axios from "axios";
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
 import {
-  SET_SEARCH_TEXT,
   SET_USER_UNFO,
   SET_ERROR_REQUEST,
   SET_USER_REPOS,
@@ -10,10 +9,10 @@ import {
 } from "./actionsConstants";
 import { TUserInfo, TUserRepo, TUserReposArray } from "../types";
 
-export const setSearchText = (payload: string) => ({
+/* export const setSearchText = (payload: string) => ({
   type: SET_SEARCH_TEXT,
   payload,
-});
+}); */
 
 export const setErrorRequest = (payload: boolean) => ({
   type: SET_ERROR_REQUEST,
@@ -52,6 +51,7 @@ export const getUserInfo = (
         following: userFoloving,
         login: userNickName,
         html_url: userURL,
+        public_repos: publickRepos,
       } = responseUserInfo.data;
 
       dispatch(
@@ -62,11 +62,44 @@ export const getUserInfo = (
           userAvatarURL,
           userFoloving,
           userFolovers,
+          publickRepos,
         })
       );
-
-      const responseUserRepos = await axios.get(
+      /*       const responseUserRepos = await axios.get(
         `https://api.github.com/users/${searchUserName}/repos`
+      );
+      const reposInfo = responseUserRepos.data;
+      const reposArray = reposInfo.map((repo: TUserRepo) => {
+        const { name, html_url: repoUrl, description } = repo;
+        return { name, repoUrl, description };
+      });
+      dispatch(setUserReros(reposArray));
+      dispatch(setLoading(false));
+
+      console.log("reposArray", reposArray); */
+    } catch (err) {
+      const status = err?.response?.status;
+      if (status >= 400) {
+        console.log("ERROR gj");
+        console.log(status);
+        dispatch(setErrorRequest(true));
+        dispatch(setLoading(false));
+      }
+    }
+  };
+};
+
+export const getUserRepos = (
+  searchUserName: String,
+  currentPage: Number = 1,
+  perPage: Number = 100
+): ThunkAction<void, unknown, unknown, Action<string>> => {
+  const t = 1;
+  return async (dispatch) => {
+    try {
+      dispatch(setLoading(true));
+      const responseUserRepos = await axios.get(
+        `https://api.github.com/users/${searchUserName}/repos?page=${currentPage}&per_page=${perPage}`
       );
       const reposInfo = responseUserRepos.data;
       const reposArray = reposInfo.map((repo: TUserRepo) => {
@@ -88,3 +121,5 @@ export const getUserInfo = (
     }
   };
 };
+
+// `https://api.github.com/users/${searchUserName}/repos`

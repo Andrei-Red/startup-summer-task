@@ -1,7 +1,8 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputAdornment, OutlinedInput } from "@material-ui/core";
-import { getUserInfo, setSearchText } from "../../../../store/actions";
+import { getUserInfo, getUserRepos } from "store/actions";
+import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
 
 export const Header: FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -17,6 +18,8 @@ export const Header: FC = () => {
   const submitFormHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(getUserInfo(inputValue));
+    dispatch(getUserRepos(inputValue, 1, MAX_REPOS_ON_PAGE));
+
     setInputValue("");
   };
 

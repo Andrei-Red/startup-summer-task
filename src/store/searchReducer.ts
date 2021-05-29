@@ -1,23 +1,13 @@
 import { TAction, TSearchInfo } from "../types";
-import {
-  SET_SEARCH_TEXT,
-  SET_ERROR_REQUEST,
-  SET_LOADIND,
-} from "./actionsConstants";
+import { SET_ERROR_REQUEST, SET_LOADIND } from "./actionsConstants";
 
 const defaultSearchInfo: TSearchInfo = {
-  inputText: "",
   isError: false,
   isLoading: false,
 };
 
 export const searchReducer = (state = defaultSearchInfo, action: TAction) => {
   switch (action.type) {
-    case SET_SEARCH_TEXT:
-      return {
-        ...state,
-        inputText: action.payload,
-      };
     case SET_ERROR_REQUEST:
       return {
         ...state,
