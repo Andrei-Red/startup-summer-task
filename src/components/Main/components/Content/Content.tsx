@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { TState, TUserInfo, TUserReposArray } from "types";
 import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
 import { getUserRepos } from "store/actions";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 type ContentProps = {
   userData: { userInfo: TUserInfo; userRepos: TUserReposArray };
@@ -14,12 +15,13 @@ export const Content: FC<ContentProps> = ({ userData }) => {
 
   const dispanch = useDispatch();
 
-  const numberOfRepositories = useSelector(
-    (state: TState) => state.userData.userInfo.publickRepos
-  );
+  const isLoading = useSelector((state: TState) => state.searchState.isLoading);
   const arrUserRepos = useSelector((state: TState) => state.userData.userRepos);
   const userName = useSelector(
     (state: TState) => state.userData.userInfo.userNickName
+  );
+  const numberOfRepositories = useSelector(
+    (state: TState) => state.userData.userInfo.publickRepos
   );
 
   const numberOfReposPage = Math.ceil(
@@ -53,18 +55,25 @@ export const Content: FC<ContentProps> = ({ userData }) => {
         activeClassName="active"
       />
 
-      <div>
-        <h4>REPOS</h4>
-        {arrUserRepos.map((repo) => (
-          <>
-            <div key={repo.repoUrl}>
-              <h5>Repo name {repo.name}</h5>
-              <p>description {repo.description}</p>
-            </div>
-            <br />
-          </>
-        ))}
-      </div>
+      {isLoading ? (
+        <>
+          <LinearProgress />
+          <LinearProgress color="secondary" />
+        </>
+      ) : (
+        <div>
+          <h4>REPOS</h4>
+          {arrUserRepos.map((repo) => (
+            <>
+              <div key={repo.repoUrl}>
+                <h5>Repo name {repo.name}</h5>
+                <p>description {repo.description}</p>
+              </div>
+              <br />
+            </>
+          ))}
+        </div>
+      )}
     </>
   );
 };
