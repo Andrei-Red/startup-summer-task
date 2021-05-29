@@ -29,7 +29,7 @@ export const setUserInfo = (payload: TUserInfo) => ({
   payload,
 });
 
-export const setUserReros = (payload: TUserReposArray) => ({
+export const setUserRepos = (payload: TUserReposArray) => ({
   type: SET_USER_REPOS,
   payload,
 });
@@ -89,13 +89,13 @@ export const getUserInfo = (
   };
 };
 
-export const getUserRepos = (
-  searchUserName: String,
-  currentPage: Number = 1,
-  perPage: Number = 100
-): ThunkAction<void, unknown, unknown, Action<string>> => {
-  const t = 1;
-  return async (dispatch) => {
+export const getUserRepos =
+  (
+    searchUserName: String,
+    currentPage: Number = 1,
+    perPage: Number = 100
+  ): ThunkAction<void, unknown, unknown, Action<string>> =>
+  async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const responseUserRepos = await axios.get(
@@ -106,7 +106,7 @@ export const getUserRepos = (
         const { name, html_url: repoUrl, description } = repo;
         return { name, repoUrl, description };
       });
-      dispatch(setUserReros(reposArray));
+      dispatch(setUserRepos(reposArray));
       dispatch(setLoading(false));
 
       console.log("reposArray", reposArray);
@@ -120,6 +120,5 @@ export const getUserRepos = (
       }
     }
   };
-};
 
 // `https://api.github.com/users/${searchUserName}/repos`

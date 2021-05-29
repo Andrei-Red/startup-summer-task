@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { TState, TUserInfo, TUserReposArray } from "types";
@@ -34,7 +34,9 @@ export const Content: FC<ContentProps> = ({ userData }) => {
   };
 
   useEffect(() => {
-    dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
+    if (userName !== "") {
+      dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
+    }
   }, [paginateCurrentPage]);
 
   return (
