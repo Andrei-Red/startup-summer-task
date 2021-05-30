@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 // import SearchIcon from "@material-ui/icons/Search";
 import { getUserInfo, getUserRepos } from "store/actions";
-import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
+import { MAX_REPOS_ON_PAGE, PLASEHOLDER_INPUT } from "appConstants/constants";
 import GIT_LOGO from "assets/img/gitLogo.svg";
 import SEARCH_IMG from "assets/img/search.svg";
 import { useStyles } from "./styled";
@@ -43,7 +43,7 @@ export const Header: FC = () => {
         <Paper
           component="form"
           onSubmit={submitFormHandler}
-          className={classes.root}
+          className={classes.form}
         >
           <IconButton
             color="primary"
@@ -59,7 +59,7 @@ export const Header: FC = () => {
           <InputBase
             onChange={inputHandler}
             className={classes.input}
-            placeholder="Search Google Maps"
+            placeholder={PLASEHOLDER_INPUT}
             inputProps={{ "aria-label": "search google maps" }}
             id="outlined-adornment-amount"
             value={inputValue}

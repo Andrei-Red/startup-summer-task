@@ -1,21 +1,31 @@
 import React, { FC, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactPaginate from "react-paginate";
+
 import { TState, TUserInfo, TUserReposArray } from "types";
 import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
 import { getUserRepos } from "store/actions";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { Typography, Box, Link, CardMedia } from "@material-ui/core";
+import { StartPage, UserContent } from "./components";
 
 type ContentProps = {
   userData: { userInfo: TUserInfo; userRepos: TUserReposArray };
+  isStatrPage: boolean;
+  numberOfReposPage: number;
+  paginateCurrentPage: number;
+  handlePageClick: (data: { selected: number }) => void;
 };
 
-export const Content: FC<ContentProps> = ({ userData }) => {
-  const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
+export const Content: FC<ContentProps> = ({
+  userData,
+  isStatrPage,
+  numberOfReposPage,
+  paginateCurrentPage,
+  handlePageClick,
+}) => {
+  const { userInfo, userRepos } = userData;
+  /*  const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
 
-  const dispanch = useDispatch();
-
-  const isLoading = useSelector((state: TState) => state.searchState.isLoading);
   const arrUserRepos = useSelector((state: TState) => state.userData.userRepos);
   const userName = useSelector(
     (state: TState) => state.userData.userInfo.userNickName
@@ -28,54 +38,51 @@ export const Content: FC<ContentProps> = ({ userData }) => {
     (numberOfRepositories || 1) / MAX_REPOS_ON_PAGE
   );
 
+  const isStatrPage = userName === "";
+
+  const dispanch = useDispatch();
+
   const handlePageClick = (data: { selected: number }) => {
     const { selected } = data;
     setPaginateCurrentPage(selected + 1);
   };
 
   useEffect(() => {
-    if (userName !== "") {
-      dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
+    if (!isStatrPage) {
+      console.log("qury");
+      // dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
     }
   }, [paginateCurrentPage]);
+ */
 
   return (
     <>
-      <h1>content</h1>
-      <h5>{userData.userInfo.userName}</h5>
-
-      <ReactPaginate
-        previousLabel="previous"
-        nextLabel="next"
-        breakLabel="..."
-        breakClassName="break-me"
-        pageCount={numberOfReposPage}
-        marginPagesDisplayed={1}
-        pageRangeDisplayed={paginateCurrentPage}
-        onPageChange={handlePageClick}
-        containerClassName="pagination"
-        activeClassName="active"
-      />
-
-      {isLoading ? (
-        <>
-          <LinearProgress />
-          <LinearProgress color="secondary" />
-        </>
+      {isStatrPage ? (
+        <StartPage />
       ) : (
-        <div>
-          <h4>REPOS</h4>
-          {arrUserRepos.map((repo) => (
-            <>
-              <div key={repo.repoUrl}>
-                <h5>Repo name {repo.name}</h5>
-                <p>description {repo.description}</p>
-              </div>
-              <br />
-            </>
-          ))}
-        </div>
+        <UserContent
+          userData={userData}
+          numberOfReposPage={numberOfReposPage}
+          paginateCurrentPage={paginateCurrentPage}
+          handlePageClick={handlePageClick}
+        />
       )}
     </>
   );
 };
+
+// isStatrPage ? (<StartPage />) : (<UserContent/>)
+
+/* isStatrPage ? (
+  <StartPage />
+) : (
+  <h1>content</h1>
+) */
+
+/* isStatrPage ? (
+  <StartPage />
+) : (
+  <h1>content</h1>
+) */
+
+/*  */

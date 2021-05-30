@@ -1,1 +1,2 @@
-export const HEADER_COLOR = "#0064EB";
+export const BLUE = "#0064EB";
+export const GRAY = "#808080";
