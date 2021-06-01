@@ -25,10 +25,6 @@ export type TUserRepo = {
 };
 
 export type TUserReposArray = [TUserRepo];
-/* export type TUserReposArray = {
-  currentPage: Number;
-  perPage: Number;
-}; */
 
 export type TState = {
   searchState: TSearchInfo;

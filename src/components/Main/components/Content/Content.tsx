@@ -1,6 +1,9 @@
 import React, { FC } from "react";
+import { Box, CardMedia, Typography } from "@material-ui/core";
+import USER_NOT_FOUND from "assets/img/userNotFound.svg";
 import { TUserInfo, TUserReposArray } from "types";
 import { StartPage, UserContent } from "./components";
+import { useStyles } from "./styled";
 
 type ContentProps = {
   userData: { userInfo: TUserInfo; userRepos: TUserReposArray };
@@ -10,6 +13,7 @@ type ContentProps = {
   handlePageClick: (data: { selected: number }) => void;
   paginateInfoObj: { firstPage: number; lastPage: number; allRrpos: number };
   isLoadingUserRepos: boolean;
+  isUserNotFound: boolean;
 };
 
 export const Content: FC<ContentProps> = ({
@@ -20,23 +24,37 @@ export const Content: FC<ContentProps> = ({
   handlePageClick,
   paginateInfoObj,
   isLoadingUserRepos,
+  isUserNotFound,
 }) => {
-  const { userInfo, userRepos } = userData;
+  const classes = useStyles();
 
   return (
     <>
-      {isStatrPage ? (
-        <StartPage />
-      ) : (
-        <UserContent
-          userData={userData}
-          numberOfReposPage={numberOfReposPage}
-          paginateCurrentPage={paginateCurrentPage}
-          handlePageClick={handlePageClick}
-          paginateInfoObj={paginateInfoObj}
-          isLoadingUserRepos={isLoadingUserRepos}
-        />
+      {isUserNotFound && (
+        <>
+          <Box className={classes.wrapperNotFoundPage}>
+            <CardMedia
+              className={classes.image}
+              image={USER_NOT_FOUND}
+              title="user-not-found"
+            />
+            <Typography className={classes.text}>User not found</Typography>
+          </Box>
+        </>
       )}
+      {!isUserNotFound &&
+        (isStatrPage ? (
+          <StartPage />
+        ) : (
+          <UserContent
+            userData={userData}
+            numberOfReposPage={numberOfReposPage}
+            paginateCurrentPage={paginateCurrentPage}
+            handlePageClick={handlePageClick}
+            paginateInfoObj={paginateInfoObj}
+            isLoadingUserRepos={isLoadingUserRepos}
+          />
+        ))}
     </>
   );
 };

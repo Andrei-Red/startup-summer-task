@@ -9,21 +9,23 @@ import { TState } from "../../types";
 
 export const Main: FC = () => {
   const userData = useSelector((state: TState) => state.userData);
+  const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
+
   const isLoadingUserInfo = useSelector(
     (state: TState) => state.searchState.isLoadingUserInfo
   );
   const isLoadingUserRepos = useSelector(
     (state: TState) => state.searchState.isLoadingUserRepos
   );
-
-  const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
-
   const arrUserRepos = useSelector((state: TState) => state.userData.userRepos);
   const userName = useSelector(
     (state: TState) => state.userData.userInfo.userNickName
   );
   const numberOfRepositories = useSelector(
     (state: TState) => state.userData.userInfo.publickRepos
+  );
+  const isUserNotFound = useSelector(
+    (state: TState) => state.searchState.isUserNotFound
   );
 
   const paginateInfoObj = calculatePageRange(
@@ -68,6 +70,7 @@ export const Main: FC = () => {
           handlePageClick={handlePageClick}
           paginateInfoObj={paginateInfoObj}
           isLoadingUserRepos={isLoadingUserRepos}
+          isUserNotFound={isUserNotFound}
         />
       )}
     </>

@@ -87,7 +87,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     borderRadius: "0.6rem",
     background: "#ffffff",
-    boxShadow: "0 0.8rem 2rem rgba(#5a6181, 0.05)",
 
     margin: "0.8rem",
     fontSize: "1.4rem",
@@ -105,5 +104,25 @@ export const useStyles = makeStyles((theme) => ({
   },
   disabledClassName: {
     filter: "grayscale(100%)",
+  },
+  wrapperRmptyPage: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyImg: {
+    width: 76,
+    height: 62,
+    margin: 12,
+  },
+  emptyTitle: {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 22,
+    color: GRAY,
   },
 }));

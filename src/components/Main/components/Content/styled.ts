@@ -2,7 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import { GRAY } from "appConstants/color";
 
 export const useStyles = makeStyles((theme) => ({
-  wrapper: {
+  wrapperNotFoundPage: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -12,9 +12,8 @@ export const useStyles = makeStyles((theme) => ({
     height: "70vh",
   },
   image: {
-    width: 64,
-    height: 64,
-    margin: 24,
+    width: 65,
+    height: 75,
   },
   text: {
     fontFamily: "Inter",
@@ -22,7 +21,5 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "normal",
     fontSize: 22,
     color: GRAY,
-    width: 220,
-    textAlign: "center",
   },
 }));
