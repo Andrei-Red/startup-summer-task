@@ -1,16 +1,12 @@
-import React, { FC, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
-  InputAdornment,
-  OutlinedInput,
   Box,
   CardMedia,
   InputBase,
   Paper,
-  Divider,
   IconButton,
 } from "@material-ui/core";
-// import SearchIcon from "@material-ui/icons/Search";
 import { getUserInfo, getUserRepos } from "store/actions";
 import { MAX_REPOS_ON_PAGE, PLASEHOLDER_INPUT } from "appConstants/constants";
 import GIT_LOGO from "assets/img/gitLogo.svg";
@@ -60,7 +56,7 @@ export const Header: FC = () => {
             onChange={inputHandler}
             className={classes.input}
             placeholder={PLASEHOLDER_INPUT}
-            inputProps={{ "aria-label": "search google maps" }}
+            inputProps={{ "aria-label": "search github users" }}
             id="outlined-adornment-amount"
             value={inputValue}
           />
@@ -69,15 +65,3 @@ export const Header: FC = () => {
     </>
   );
 };
-
-{
-  /* <form onSubmit={submitFormHandler} className={classes.form}>
-<OutlinedInput
-  id="outlined-adornment-amount"
-  value={inputValue}
-  onChange={inputHandler}
-  startAdornment={<InputAdornment position="start">$</InputAdornment>}
-  labelWidth={60}
-/>
-</form> */
-}

@@ -26,7 +26,7 @@ export const UserContent: FC<UserContentProps> = ({
   const classes = useStyles();
   return (
     <Grid container>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={12} md={5} className={classes.wrapper}>
         <UserInfo userInfo={userInfo} />
       </Grid>
       <Grid item xs={12} md={7}>

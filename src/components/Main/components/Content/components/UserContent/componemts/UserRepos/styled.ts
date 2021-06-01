@@ -6,6 +6,10 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     height: 110,
     margin: 24,
+    [theme.breakpoints.down("xs")]: {
+      height: 60,
+      margin: 12,
+    },
   },
   title: {
     fontFamily: "Inter",
@@ -13,11 +17,17 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontSize: 32,
     margin: 24,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 18,
+    },
   },
   repoContent: {
     marginTop: "auto",
     marginBottom: "auto",
     marginLeft: 20,
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 12,
+    },
   },
   repoName: {
     fontFamily: "Inter",
@@ -26,18 +36,27 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 24,
     color: BLUE,
     textDecoration: "none",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 14,
+    },
   },
   repoDiscription: {
     fontFamily: "Inter",
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: 16,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 12,
+    },
   },
   paginateContainer: {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
     margin: 25,
+    [theme.breakpoints.down("xs")]: {
+      margin: 16,
+    },
   },
   paginateInfo: {
     fontFamily: "Inter",
@@ -46,6 +65,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     color: GRAY,
     marginRight: 12,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 12,
+      marginRight: 8,
+    },
   },
   containerClassName: {
     display: "flex",
@@ -67,6 +90,12 @@ export const useStyles = makeStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: 14,
+    [theme.breakpoints.down("xs")]: {
+      width: 16,
+      height: 20,
+      margin: 0,
+      fontSize: 12,
+    },
   },
   previousClassName: {
     cursor: "pointer",
@@ -91,6 +120,10 @@ export const useStyles = makeStyles((theme) => ({
     margin: "0.8rem",
     fontSize: "1.4rem",
     cursor: "pointer",
+    [theme.breakpoints.down("xs")]: {
+      margin: "0.6rem",
+      fontSize: "1rem",
+    },
   },
   activ: {
     width: 20,

@@ -11,9 +11,14 @@ export const useStyles = makeStyles((theme) => ({
     background: BLUE,
   },
   logo: {
-    width: 40,
+    width: 42,
     height: 40,
     margin: "16px 10px 16px 40px",
+    [theme.breakpoints.down("xs")]: {
+      width: 40,
+      height: 34,
+      margin: "10px 8px 10px 15px",
+    },
   },
   searchIcon: {
     width: 14,
@@ -24,14 +29,23 @@ export const useStyles = makeStyles((theme) => ({
     width: 500,
     height: 40,
     margin: 10,
+    [theme.breakpoints.down("xs")]: {
+      width: 280,
+    },
   },
   input: {
+    width: 400,
     marginLeft: theme.spacing(1),
     flex: 1,
     fontFamily: "Inter",
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: 14,
+    [theme.breakpoints.down("xs")]: {
+      width: 180,
+      height: 30,
+      fontSize: 12,
+    },
   },
   iconButton: {
     padding: 10,

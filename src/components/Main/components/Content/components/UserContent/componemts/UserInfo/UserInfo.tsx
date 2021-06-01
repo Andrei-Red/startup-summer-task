@@ -15,21 +15,25 @@ export const UserInfo: FC<UserInfoProps> = ({ userInfo }) => {
 
   return (
     <Box className={classes.wrapperUserInfo}>
-      <CardMedia
-        className={classes.avatar}
-        image={userInfo.userAvatarURL}
-        title="user-avetar"
-      />
-      <Typography className={classes.userName}>
-        {userInfo.userName ? userInfo.userName : "No name"}
-      </Typography>
-      <Link
-        href={userInfo.userURL}
-        target="_blank"
-        className={classes.userLink}
-      >
-        {userInfo.userNickName}
-      </Link>
+      <Box className={classes.wrapperUserNameAndAvatar}>
+        <CardMedia
+          className={classes.avatar}
+          image={userInfo.userAvatarURL}
+          title="user-avetar"
+        />
+        <Box className={classes.wrapperUserNameAndLink}>
+          <Typography className={classes.userName}>
+            {userInfo.userName ? userInfo.userName : "No name"}
+          </Typography>
+          <Link
+            href={userInfo.userURL}
+            target="_blank"
+            className={classes.userLink}
+          >
+            {userInfo.userNickName}
+          </Link>
+        </Box>
+      </Box>
       <Box className={classes.wrapperFollowersContainer}>
         <CardMedia
           className={classes.icon}
