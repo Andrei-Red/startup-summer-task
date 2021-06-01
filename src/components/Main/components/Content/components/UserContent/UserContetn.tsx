@@ -10,7 +10,9 @@ import {
 } from "@material-ui/core";
 import FOLLOWERS_IMG from "assets/img/followers.svg";
 import FOLOWING_IMG from "assets/img/folowing.svg";
-import { TState, TUserInfo, TUserReposArray } from "types";
+import ARROW_LEFT from "assets/arrow/arrow-left.svg";
+import ARROW_RIGHT from "assets/arrow/arrow-right.svg";
+import { TUserInfo, TUserReposArray } from "types";
 
 import { useStyles } from "./styled";
 
@@ -99,42 +101,37 @@ export const UserContent: FC<UserContentProps> = ({
         ))}
         <Box>
           <ReactPaginate
-            previousLabel="previous"
-            nextLabel="next"
+            previousLabel={
+              <CardMedia
+                className={classes.arrow}
+                image={ARROW_LEFT}
+                title="arrow-lefr"
+              />
+            }
+            nextLabel={
+              <CardMedia
+                className={classes.arrow}
+                image={ARROW_RIGHT}
+                title="arrow-right"
+              />
+            }
             breakLabel="..."
             breakClassName="break-me"
             pageCount={numberOfReposPage}
             marginPagesDisplayed={1}
-            pageRangeDisplayed={paginateCurrentPage}
+            pageRangeDisplayed={1}
+            initialPage={paginateCurrentPage - 1}
             onPageChange={handlePageClick}
-            containerClassName={classes.test}
-            activeClassName="active"
+            containerClassName={classes.containerClassName}
+            activeClassName={classes.activ}
+            pageClassName={classes.pageClassName}
+            pageLinkClassName={classes.pageLinkClassName}
+            previousClassName={classes.previousClassName}
+            nextClassName={classes.nextClassName}
+            disabledClassName={classes.disabledClassName}
           />
         </Box>
       </Grid>
     </Grid>
   );
 };
-
-/* {arrUserRepos.map((repo) => (
-  <>
-    <div key={repo.repoUrl}>
-      <h5>Repo name {repo.name}</h5>
-      <p>description {repo.description}</p>
-    </div>
-    <br />
-  </>
-))} */
-
-/* <ReactPaginate
-previousLabel="previous"
-nextLabel="next"
-breakLabel="..."
-breakClassName="break-me"
-pageCount={numberOfReposPage}
-marginPagesDisplayed={1}
-pageRangeDisplayed={paginateCurrentPage}
-onPageChange={handlePageClick}
-containerClassName="pagination"
-activeClassName="active"
-/> */

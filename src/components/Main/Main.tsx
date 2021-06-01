@@ -9,7 +9,6 @@ import { TState } from "../../types";
 export const Main: FC = () => {
   const userData = useSelector((state: TState) => state.userData);
   const isLoading = useSelector((state: TState) => state.searchState.isLoading);
-  console.log("userData", userData);
 
   const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
 
