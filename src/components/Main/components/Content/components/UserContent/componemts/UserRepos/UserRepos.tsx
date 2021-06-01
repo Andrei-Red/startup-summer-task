@@ -1,13 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import ReactPaginate from "react-paginate";
-import {
-  CardMedia,
-  Typography,
-  Box,
-  Link,
-  Grid,
-  Paper,
-} from "@material-ui/core";
+import { CardMedia, Typography, Box, Link, Paper } from "@material-ui/core";
 import ARROW_LEFT from "assets/arrow/arrow-left.svg";
 import ARROW_RIGHT from "assets/arrow/arrow-right.svg";
 import { TUserInfo, TUserReposArray } from "types";

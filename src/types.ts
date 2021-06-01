@@ -1,6 +1,8 @@
 export type TSearchInfo = {
   isError: boolean;
-  isLoading: boolean;
+  isUserNotFound: boolean;
+  isLoadingUserInfo: boolean;
+  isLoadingUserRepos: boolean;
 };
 
 export type TAction = { type: string; payload: unknown };

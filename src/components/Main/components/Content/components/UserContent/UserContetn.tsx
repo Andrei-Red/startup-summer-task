@@ -1,14 +1,5 @@
 import React, { FC } from "react";
-
-import {
-  CardMedia,
-  Typography,
-  Box,
-  Link,
-  Grid,
-  Paper,
-} from "@material-ui/core";
-
+import { Grid, LinearProgress } from "@material-ui/core";
 import { TUserInfo, TUserReposArray } from "types";
 import { useStyles } from "./styled";
 import { UserInfo, UserRepos } from "./componemts";
@@ -19,6 +10,7 @@ type UserContentProps = {
   paginateCurrentPage: number;
   handlePageClick: (data: { selected: number }) => void;
   paginateInfoObj: { firstPage: number; lastPage: number; allRrpos: number };
+  isLoadingUserRepos: boolean;
 };
 
 export const UserContent: FC<UserContentProps> = ({
@@ -27,6 +19,7 @@ export const UserContent: FC<UserContentProps> = ({
   paginateCurrentPage,
   handlePageClick,
   paginateInfoObj,
+  isLoadingUserRepos,
 }) => {
   const { userInfo, userRepos } = userData;
 
@@ -37,14 +30,21 @@ export const UserContent: FC<UserContentProps> = ({
         <UserInfo userInfo={userInfo} />
       </Grid>
       <Grid item xs={12} md={7}>
-        <UserRepos
-          userInfo={userInfo}
-          userRepos={userRepos}
-          numberOfReposPage={numberOfReposPage}
-          paginateCurrentPage={paginateCurrentPage}
-          handlePageClick={handlePageClick}
-          paginateInfoObj={paginateInfoObj}
-        />
+        {isLoadingUserRepos ? (
+          <>
+            <LinearProgress />
+            <LinearProgress color="secondary" />
+          </>
+        ) : (
+          <UserRepos
+            userInfo={userInfo}
+            userRepos={userRepos}
+            numberOfReposPage={numberOfReposPage}
+            paginateCurrentPage={paginateCurrentPage}
+            handlePageClick={handlePageClick}
+            paginateInfoObj={paginateInfoObj}
+          />
+        )}
       </Grid>
     </Grid>
   );

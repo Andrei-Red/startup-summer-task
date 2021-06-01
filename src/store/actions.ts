@@ -5,22 +5,29 @@ import {
   SET_USER_UNFO,
   SET_ERROR_REQUEST,
   SET_USER_REPOS,
-  SET_LOADIND,
+  SET_LOADIND_USER_INFO,
+  SET_LOADIND_USER_REPOS,
+  SET_ERROR_USER_NOT_FOUND,
 } from "./actionsConstants";
 import { TUserInfo, TUserRepo, TUserReposArray } from "../types";
-
-/* export const setSearchText = (payload: string) => ({
-  type: SET_SEARCH_TEXT,
-  payload,
-}); */
 
 export const setErrorRequest = (payload: boolean) => ({
   type: SET_ERROR_REQUEST,
   payload,
 });
 
-export const setLoading = (payload: boolean) => ({
-  type: SET_LOADIND,
+export const setErrorUserNotFound = (payload: boolean) => ({
+  type: SET_ERROR_USER_NOT_FOUND,
+  payload,
+});
+
+export const setLoadingUserInfo = (payload: boolean) => ({
+  type: SET_LOADIND_USER_INFO,
+  payload,
+});
+
+export const setLoadingUserRepos = (payload: boolean) => ({
+  type: SET_LOADIND_USER_REPOS,
   payload,
 });
 
@@ -40,7 +47,9 @@ export const getUserInfo = (
   const t = 1;
   return async (dispatch) => {
     try {
-      dispatch(setLoading(true));
+      dispatch(setLoadingUserInfo(true));
+      dispatch(setErrorUserNotFound(false));
+
       const responseUserInfo = await axios.get(
         `https://api.github.com/users/${searchUserName}`
       );
@@ -65,26 +74,15 @@ export const getUserInfo = (
           publickRepos,
         })
       );
-      /*       const responseUserRepos = await axios.get(
-        `https://api.github.com/users/${searchUserName}/repos`
-      );
-      const reposInfo = responseUserRepos.data;
-      const reposArray = reposInfo.map((repo: TUserRepo) => {
-        const { name, html_url: repoUrl, description } = repo;
-        return { name, repoUrl, description };
-      });
-      dispatch(setUserReros(reposArray));
-      dispatch(setLoading(false));
-
-      console.log("reposArray", reposArray); */
+      dispatch(setLoadingUserInfo(false));
     } catch (err) {
       const status = err?.response?.status;
-      if (status >= 400) {
-        console.log("ERROR gj");
-        console.log(status);
+      if (status === 404) {
+        dispatch(setErrorUserNotFound(true));
+      } else {
         dispatch(setErrorRequest(true));
-        dispatch(setLoading(false));
       }
+      dispatch(setLoadingUserInfo(false));
     }
   };
 };
@@ -97,7 +95,7 @@ export const getUserRepos =
   ): ThunkAction<void, unknown, unknown, Action<string>> =>
   async (dispatch) => {
     try {
-      dispatch(setLoading(true));
+      dispatch(setLoadingUserRepos(true));
       const responseUserRepos = await axios.get(
         `https://api.github.com/users/${searchUserName}/repos?page=${currentPage}&per_page=${perPage}`
       );
@@ -107,18 +105,12 @@ export const getUserRepos =
         return { name, repoUrl, description };
       });
       dispatch(setUserRepos(reposArray));
-      dispatch(setLoading(false));
-
-      console.log("reposArray", reposArray);
+      dispatch(setLoadingUserRepos(false));
     } catch (err) {
       const status = err?.response?.status;
       if (status >= 400) {
-        console.log("ERROR gj");
-        console.log(status);
         dispatch(setErrorRequest(true));
-        dispatch(setLoading(false));
       }
+      dispatch(setLoadingUserRepos(false));
     }
   };
-
-// `https://api.github.com/users/${searchUserName}/repos`

@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState, useCallback } from "react";
-import { TState, TUserInfo, TUserReposArray } from "types";
+import React, { FC } from "react";
+import { TUserInfo, TUserReposArray } from "types";
 import { StartPage, UserContent } from "./components";
 
 type ContentProps = {
@@ -9,6 +9,7 @@ type ContentProps = {
   paginateCurrentPage: number;
   handlePageClick: (data: { selected: number }) => void;
   paginateInfoObj: { firstPage: number; lastPage: number; allRrpos: number };
+  isLoadingUserRepos: boolean;
 };
 
 export const Content: FC<ContentProps> = ({
@@ -18,6 +19,7 @@ export const Content: FC<ContentProps> = ({
   paginateCurrentPage,
   handlePageClick,
   paginateInfoObj,
+  isLoadingUserRepos,
 }) => {
   const { userInfo, userRepos } = userData;
 
@@ -32,6 +34,7 @@ export const Content: FC<ContentProps> = ({
           paginateCurrentPage={paginateCurrentPage}
           handlePageClick={handlePageClick}
           paginateInfoObj={paginateInfoObj}
+          isLoadingUserRepos={isLoadingUserRepos}
         />
       )}
     </>

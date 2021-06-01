@@ -1,12 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import {
-  CardMedia,
-  Typography,
-  Box,
-  Link,
-  Grid,
-  Paper,
-} from "@material-ui/core";
+import React, { FC } from "react";
+import { CardMedia, Typography, Box, Link } from "@material-ui/core";
 import { transformationFolowers } from "utils/transformationFolowers";
 import FOLLOWERS_IMG from "assets/img/followers.svg";
 import FOLOWING_IMG from "assets/img/folowing.svg";
