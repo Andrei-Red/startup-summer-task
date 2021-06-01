@@ -12,8 +12,8 @@ import FOLLOWERS_IMG from "assets/img/followers.svg";
 import FOLOWING_IMG from "assets/img/folowing.svg";
 import ARROW_LEFT from "assets/arrow/arrow-left.svg";
 import ARROW_RIGHT from "assets/arrow/arrow-right.svg";
-import { TUserInfo, TUserReposArray } from "types";
 
+import { TUserInfo, TUserReposArray } from "types";
 import { useStyles } from "./styled";
 
 type UserContentProps = {
@@ -21,6 +21,7 @@ type UserContentProps = {
   numberOfReposPage: number;
   paginateCurrentPage: number;
   handlePageClick: (data: { selected: number }) => void;
+  paginateInfoObj: { firstPage: number; lastPage: number; allRrpos: number };
 };
 
 export const UserContent: FC<UserContentProps> = ({
@@ -28,11 +29,11 @@ export const UserContent: FC<UserContentProps> = ({
   numberOfReposPage,
   paginateCurrentPage,
   handlePageClick,
+  paginateInfoObj,
 }) => {
   const { userInfo, userRepos } = userData;
 
   const classes = useStyles();
-
   return (
     <Grid container>
       <Grid item xs={12} md={5}>
@@ -99,37 +100,45 @@ export const UserContent: FC<UserContentProps> = ({
             </Box>
           </Paper>
         ))}
-        <Box>
-          <ReactPaginate
-            previousLabel={
-              <CardMedia
-                className={classes.arrow}
-                image={ARROW_LEFT}
-                title="arrow-lefr"
-              />
-            }
-            nextLabel={
-              <CardMedia
-                className={classes.arrow}
-                image={ARROW_RIGHT}
-                title="arrow-right"
-              />
-            }
-            breakLabel="..."
-            breakClassName="break-me"
-            pageCount={numberOfReposPage}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={1}
-            initialPage={paginateCurrentPage - 1}
-            onPageChange={handlePageClick}
-            containerClassName={classes.containerClassName}
-            activeClassName={classes.activ}
-            pageClassName={classes.pageClassName}
-            pageLinkClassName={classes.pageLinkClassName}
-            previousClassName={classes.previousClassName}
-            nextClassName={classes.nextClassName}
-            disabledClassName={classes.disabledClassName}
-          />
+        <Box className={classes.paginateContainer}>
+          <Box>
+            <Typography className={classes.paginateInfo}>
+              {paginateInfoObj.firstPage}-{paginateInfoObj.lastPage} of{" "}
+              {paginateInfoObj.allRrpos} items
+            </Typography>
+          </Box>
+          <Box>
+            <ReactPaginate
+              previousLabel={
+                <CardMedia
+                  className={classes.arrow}
+                  image={ARROW_LEFT}
+                  title="arrow-lefr"
+                />
+              }
+              nextLabel={
+                <CardMedia
+                  className={classes.arrow}
+                  image={ARROW_RIGHT}
+                  title="arrow-right"
+                />
+              }
+              breakLabel="..."
+              breakClassName="break-me"
+              pageCount={numberOfReposPage}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={1}
+              initialPage={paginateCurrentPage - 1}
+              onPageChange={handlePageClick}
+              containerClassName={classes.containerClassName}
+              activeClassName={classes.activ}
+              pageClassName={classes.pageClassName}
+              pageLinkClassName={classes.pageLinkClassName}
+              previousClassName={classes.previousClassName}
+              nextClassName={classes.nextClassName}
+              disabledClassName={classes.disabledClassName}
+            />
+          </Box>
         </Box>
       </Grid>
     </Grid>

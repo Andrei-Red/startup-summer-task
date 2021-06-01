@@ -73,6 +73,20 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "normal",
     fontSize: 16,
   },
+  paginateContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    margin: 25,
+  },
+  paginateInfo: {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 14,
+    color: GRAY,
+    marginRight: 12,
+  },
   containerClassName: {
     display: "flex",
     justifyContent: "center",

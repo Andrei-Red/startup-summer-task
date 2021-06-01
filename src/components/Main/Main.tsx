@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
 import { getUserRepos } from "store/actions";
+import { pageRange } from "utils/pageRange";
 import { Content, Header } from "./components";
 import { TState } from "../../types";
 
@@ -19,6 +20,8 @@ export const Main: FC = () => {
   const numberOfRepositories = useSelector(
     (state: TState) => state.userData.userInfo.publickRepos
   );
+
+  const paginateInfoObj = pageRange(numberOfRepositories, paginateCurrentPage);
 
   const numberOfReposPage = Math.ceil(
     (numberOfRepositories || 1) / MAX_REPOS_ON_PAGE
@@ -55,6 +58,7 @@ export const Main: FC = () => {
           numberOfReposPage={numberOfReposPage}
           paginateCurrentPage={paginateCurrentPage}
           handlePageClick={handlePageClick}
+          paginateInfoObj={paginateInfoObj}
         />
       )}
     </>
