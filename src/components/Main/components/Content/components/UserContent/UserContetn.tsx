@@ -12,7 +12,7 @@ import FOLLOWERS_IMG from "assets/img/followers.svg";
 import FOLOWING_IMG from "assets/img/folowing.svg";
 import ARROW_LEFT from "assets/arrow/arrow-left.svg";
 import ARROW_RIGHT from "assets/arrow/arrow-right.svg";
-
+import { transformationFolowers } from "utils/transformationFolowers";
 import { TUserInfo, TUserReposArray } from "types";
 import { useStyles } from "./styled";
 
@@ -60,7 +60,7 @@ export const UserContent: FC<UserContentProps> = ({
               title="followers-icon"
             />
             <Typography className={classes.textFollowers}>
-              {String(userInfo.userFolovers)} followers
+              {transformationFolowers(userInfo.userFolovers)} followers
             </Typography>
 
             <CardMedia
@@ -69,7 +69,7 @@ export const UserContent: FC<UserContentProps> = ({
               title="folowing-icon"
             />
             <Typography className={classes.textFollowers}>
-              {String(userInfo.userFoloving)} followers
+              {transformationFolowers(userInfo.userFoloving)} following
             </Typography>
           </Box>
         </Box>

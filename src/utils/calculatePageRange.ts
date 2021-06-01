@@ -1,6 +1,6 @@
 import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
 
-export const pageRange = (
+export const calculatePageRange = (
   allRrpos: number | null,
   currenPage: number,
   reposOnPage = MAX_REPOS_ON_PAGE
