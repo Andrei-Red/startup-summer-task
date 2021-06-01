@@ -10,10 +10,11 @@ import {
 } from "@material-ui/core";
 import ARROW_LEFT from "assets/arrow/arrow-left.svg";
 import ARROW_RIGHT from "assets/arrow/arrow-right.svg";
-import { TUserReposArray } from "types";
+import { TUserInfo, TUserReposArray } from "types";
 import { useStyles } from "./styled";
 
 type UserReposProps = {
+  userInfo: TUserInfo;
   userRepos: TUserReposArray;
   numberOfReposPage: number;
   paginateCurrentPage: number;
@@ -21,7 +22,14 @@ type UserReposProps = {
   paginateInfoObj: { firstPage: number; lastPage: number; allRrpos: number };
 };
 
-export const UserRepos: FC<UserReposProps> = ({}) => {
+export const UserRepos: FC<UserReposProps> = ({
+  userInfo,
+  userRepos,
+  numberOfReposPage,
+  paginateCurrentPage,
+  handlePageClick,
+  paginateInfoObj,
+}) => {
   const classes = useStyles();
 
   return (

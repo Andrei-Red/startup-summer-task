@@ -38,6 +38,7 @@ export const UserContent: FC<UserContentProps> = ({
       </Grid>
       <Grid item xs={12} md={7}>
         <UserRepos
+          userInfo={userInfo}
           userRepos={userRepos}
           numberOfReposPage={numberOfReposPage}
           paginateCurrentPage={paginateCurrentPage}
