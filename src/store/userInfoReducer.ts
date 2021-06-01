@@ -1,5 +1,5 @@
 import { SET_USER_UNFO, SET_USER_REPOS } from "./actionsConstants";
-import { TUserInfo, TAction } from "../types";
+import { TAction } from "../types";
 
 const defaultUserInfo = {
   userInfo: {

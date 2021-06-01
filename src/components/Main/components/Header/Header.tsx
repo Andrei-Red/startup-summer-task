@@ -8,12 +8,20 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { getUserInfo, getUserRepos } from "store/actions";
-import { MAX_REPOS_ON_PAGE, PLASEHOLDER_INPUT } from "appConstants/constants";
+import {
+  MAX_REPOS_ON_PAGE,
+  PLASEHOLDER_INPUT,
+  PAGINATION_START_PAGE,
+} from "appConstants/constants";
 import GIT_LOGO from "assets/img/gitLogo.svg";
 import SEARCH_IMG from "assets/img/search.svg";
 import { useStyles } from "./styled";
 
-export const Header: FC = () => {
+type HeaderProps = {
+  setPaginateCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export const Header: FC<HeaderProps> = ({ setPaginateCurrentPage }) => {
   const [inputValue, setInputValue] = useState("");
 
   const dispatch = useDispatch();
@@ -27,6 +35,7 @@ export const Header: FC = () => {
     e.preventDefault();
     dispatch(getUserInfo(inputValue));
     dispatch(getUserRepos(inputValue, 1, MAX_REPOS_ON_PAGE));
+    setPaginateCurrentPage(PAGINATION_START_PAGE);
     setInputValue("");
   };
 

@@ -1,32 +1,34 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { MAX_REPOS_ON_PAGE } from "appConstants/constants";
+import {
+  MAX_REPOS_ON_PAGE,
+  PAGINATION_START_PAGE,
+} from "appConstants/constants";
 import { getUserRepos } from "store/actions";
+import {
+  selecrorLoadingUserInfo,
+  selecrorsLoadingUserRepos,
+  selecrorsUserName,
+  selecrorsNumberOfRepositories,
+  selecrorsUserNotFound,
+} from "store/selectors";
+import { TState } from "types";
 import { calculatePageRange } from "utils/calculatePageRange";
 import { Content, Header } from "./components";
-import { TState } from "../../types";
 
 export const Main: FC = () => {
   const userData = useSelector((state: TState) => state.userData);
-  const [paginateCurrentPage, setPaginateCurrentPage] = useState(1);
+  const [paginateCurrentPage, setPaginateCurrentPage] = useState(
+    PAGINATION_START_PAGE
+  );
 
-  const isLoadingUserInfo = useSelector(
-    (state: TState) => state.searchState.isLoadingUserInfo
-  );
-  const isLoadingUserRepos = useSelector(
-    (state: TState) => state.searchState.isLoadingUserRepos
-  );
-  const arrUserRepos = useSelector((state: TState) => state.userData.userRepos);
-  const userName = useSelector(
-    (state: TState) => state.userData.userInfo.userNickName
-  );
-  const numberOfRepositories = useSelector(
-    (state: TState) => state.userData.userInfo.publickRepos
-  );
-  const isUserNotFound = useSelector(
-    (state: TState) => state.searchState.isUserNotFound
-  );
+  const userName = useSelector(selecrorsUserName);
+  const numberOfRepositories = useSelector(selecrorsNumberOfRepositories);
+  const isLoadingUserInfo = useSelector(selecrorLoadingUserInfo);
+  const isLoadingUserRepos = useSelector(selecrorsLoadingUserRepos);
+  const isUserNotFound = useSelector(selecrorsUserNotFound);
+  const isStatrPage = userName === "";
 
   const paginateInfoObj = calculatePageRange(
     numberOfRepositories,
@@ -37,8 +39,6 @@ export const Main: FC = () => {
     (numberOfRepositories || 1) / MAX_REPOS_ON_PAGE
   );
 
-  const isStatrPage = userName === "";
-
   const dispanch = useDispatch();
 
   const handlePageClick = (data: { selected: number }) => {
@@ -48,14 +48,13 @@ export const Main: FC = () => {
 
   useEffect(() => {
     if (!isStatrPage) {
-      console.log("qury");
       dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
     }
-  }, [paginateCurrentPage]);
+  }, [dispanch, isStatrPage, paginateCurrentPage, userName]);
 
   return (
     <>
-      <Header />
+      <Header setPaginateCurrentPage={setPaginateCurrentPage} />
       {isLoadingUserInfo ? (
         <>
           <LinearProgress />

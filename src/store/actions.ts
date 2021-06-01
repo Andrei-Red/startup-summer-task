@@ -41,11 +41,11 @@ export const setUserRepos = (payload: TUserReposArray) => ({
   payload,
 });
 
-export const getUserInfo = (
-  searchUserName: String
-): ThunkAction<void, unknown, unknown, Action<string>> => {
-  const t = 1;
-  return async (dispatch) => {
+export const getUserInfo =
+  (
+    searchUserName: String
+  ): ThunkAction<void, unknown, unknown, Action<string>> =>
+  async (dispatch) => {
     try {
       dispatch(setLoadingUserInfo(true));
       dispatch(setErrorUserNotFound(false));
@@ -85,7 +85,6 @@ export const getUserInfo = (
       dispatch(setLoadingUserInfo(false));
     }
   };
-};
 
 export const getUserRepos =
   (

@@ -115,7 +115,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "0.6rem",
-    background: "#ffffff",
+    background: WIGHT,
 
     margin: "0.8rem",
     fontSize: "1.4rem",
