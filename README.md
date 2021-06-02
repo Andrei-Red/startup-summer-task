@@ -8,6 +8,8 @@ https://startup-summer-task.paralect.com/
 
 #### Deploy: 
 - https://pensive-newton-214755.netlify.app/
+- ![image](https://user-images.githubusercontent.com/58862645/120460250-a0365b80-c3a1-11eb-8fd5-a83d241f193c.png)
+
 
 ### Stack:  
 1. React - https://reactjs.org/  
