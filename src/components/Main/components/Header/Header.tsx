@@ -1,5 +1,4 @@
-import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { FC } from "react";
 import {
   Box,
   CardMedia,
@@ -7,25 +6,22 @@ import {
   Paper,
   IconButton,
 } from "@material-ui/core";
-import { getUserInfo, getUserRepos } from "store/actions";
-import {
-  MAX_REPOS_ON_PAGE,
-  PLASEHOLDER_INPUT,
-  PAGINATION_START_PAGE,
-} from "appConstants/constants";
+import { PLASEHOLDER_INPUT } from "appConstants/constants";
 import GIT_LOGO from "assets/img/gitLogo.svg";
 import SEARCH_IMG from "assets/img/search.svg";
 import { useStyles } from "./styled";
 
 type HeaderProps = {
-  setPaginateCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  submitForm: () => void;
+  inputValue: string;
 };
 
-export const Header: FC<HeaderProps> = ({ setPaginateCurrentPage }) => {
-  const [inputValue, setInputValue] = useState("");
-
-  const dispatch = useDispatch();
-
+export const Header: FC<HeaderProps> = ({
+  setInputValue,
+  submitForm,
+  inputValue,
+}) => {
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     setInputValue(searchText);
@@ -33,10 +29,7 @@ export const Header: FC<HeaderProps> = ({ setPaginateCurrentPage }) => {
 
   const submitFormHandler = (e: React.ChangeEvent<HTMLDivElement>) => {
     e.preventDefault();
-    dispatch(getUserInfo(inputValue));
-    dispatch(getUserRepos(inputValue, 1, MAX_REPOS_ON_PAGE));
-    setPaginateCurrentPage(PAGINATION_START_PAGE);
-    setInputValue("");
+    submitForm();
   };
 
   const classes = useStyles();

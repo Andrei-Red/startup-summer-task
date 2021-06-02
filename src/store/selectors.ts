@@ -14,3 +14,5 @@ export const selecrorsNumberOfRepositories = (state: TState) =>
 
 export const selecrorsUserNotFound = (state: TState) =>
   state.searchState.isUserNotFound;
+
+export const selecrorsUserData = (state: TState) => state.userData;

@@ -5,24 +5,25 @@ import {
   MAX_REPOS_ON_PAGE,
   PAGINATION_START_PAGE,
 } from "appConstants/constants";
-import { getUserRepos } from "store/actions";
+import { getUserRepos, getUserInfo } from "store/actions";
 import {
   selecrorLoadingUserInfo,
   selecrorsLoadingUserRepos,
   selecrorsUserName,
   selecrorsNumberOfRepositories,
   selecrorsUserNotFound,
+  selecrorsUserData,
 } from "store/selectors";
-import { TState } from "types";
 import { calculatePageRange } from "utils/calculatePageRange";
 import { Content, Header } from "./components";
 
 export const Main: FC = () => {
-  const userData = useSelector((state: TState) => state.userData);
+  const [inputValue, setInputValue] = useState("");
   const [paginateCurrentPage, setPaginateCurrentPage] = useState(
     PAGINATION_START_PAGE
   );
 
+  const userData = useSelector(selecrorsUserData);
   const userName = useSelector(selecrorsUserName);
   const numberOfRepositories = useSelector(selecrorsNumberOfRepositories);
   const isLoadingUserInfo = useSelector(selecrorLoadingUserInfo);
@@ -39,7 +40,14 @@ export const Main: FC = () => {
     (numberOfRepositories || 1) / MAX_REPOS_ON_PAGE
   );
 
-  const dispanch = useDispatch();
+  const dispatch = useDispatch();
+
+  const submitForm = () => {
+    dispatch(getUserInfo(inputValue));
+    dispatch(getUserRepos(inputValue, 1, MAX_REPOS_ON_PAGE));
+    setPaginateCurrentPage(PAGINATION_START_PAGE);
+    setInputValue("");
+  };
 
   const handlePageClick = (data: { selected: number }) => {
     const { selected } = data;
@@ -48,13 +56,17 @@ export const Main: FC = () => {
 
   useEffect(() => {
     if (!isStatrPage) {
-      dispanch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
+      dispatch(getUserRepos(userName, paginateCurrentPage, MAX_REPOS_ON_PAGE));
     }
-  }, [dispanch, isStatrPage, paginateCurrentPage, userName]);
+  }, [dispatch, isStatrPage, paginateCurrentPage, userName]);
 
   return (
     <>
-      <Header setPaginateCurrentPage={setPaginateCurrentPage} />
+      <Header
+        setInputValue={setInputValue}
+        submitForm={submitForm}
+        inputValue={inputValue}
+      />
       {isLoadingUserInfo ? (
         <>
           <LinearProgress />
