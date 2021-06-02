@@ -1,3 +1,28 @@
+# Startup Summer 2021. 
+
+#### Task: 
+https://startup-summer-task.paralect.com/
+
+#### Author:
+- [Андрей @Andrei107Q](https://github.com/Andrei107Q) - Frontend developer
+
+#### Deploy: 
+- https://pensive-newton-214755.netlify.app/
+
+### Stack:  
+1. React - https://reactjs.org/  
+2. Redux, redux-thunk, redux-devtools-extension - https://redux.js.org/  
+3. Typescript - https://www.typescriptlang.org/
+
+### Used libs:  
+1. react-paginate - https://www.npmjs.com/package/react-paginate
+2. material-ui - https://material-ui.com/
+3. axios - https://github.com/axios/axios
+
+### Linters:
+- prettier
+- eslint.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
