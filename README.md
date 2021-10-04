@@ -4,7 +4,7 @@
 https://startup-summer-task.paralect.com/
 
 #### Author:
-- [Андрей @Andrei107Q](https://github.com/Andrei107Q) - Frontend developer
+- [Андрей @Andrei-Red](https://github.com/Andrei-Red) - Frontend developer
 
 #### Deploy: 
 - https://pensive-newton-214755.netlify.app/
